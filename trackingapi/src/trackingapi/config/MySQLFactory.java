@@ -1,7 +1,10 @@
 package trackingapi.config;
 
-import java.sql.*;
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 /**
  * @desc A singleton database access class for MySQL
  * @author Ramindu
@@ -56,7 +59,34 @@ public final class MySQLFactory {
         statement = db.conn.createStatement();
         int result = statement.executeUpdate(insertQuery);
         return result;
- 
+    }
+    
+    public static void closeConnection(Connection oConn) throws SQLException{
+    	try {
+    		if(oConn!=null) {
+    			oConn.close();
+    		}
+    	}catch(SQLException e) {
+    		throw e;
+    	}
+    }
+    public static void closeStatement(Statement stmt) throws SQLException{
+    	try {
+    		if(stmt!=null) {
+    			stmt.close();
+    		}
+    	}catch(SQLException e) {
+    		throw e;
+    	}
+    }
+    public static void closeResultSet(ResultSet rs) throws SQLException{
+    	try {
+    		if(rs!=null) {
+    			rs.close();
+    		}
+    	}catch(SQLException e) {
+    		throw e;
+    	}
     }
     
     public static void main(String[] args) {
